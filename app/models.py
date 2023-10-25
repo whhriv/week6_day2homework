@@ -7,4 +7,6 @@ class User(db.Model):
     last_name = db.Column(db.String, nullable=False)
     phone = db.Column(db.String, nullable=False, unique=True)
     address = db.Column(db.String, nullable=False, unique=True)
-   
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    

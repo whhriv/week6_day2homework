@@ -1,6 +1,7 @@
-from app import app
-from flask import render_template, redirect, url_for
-from app.forms import SignUpForm
+from app import app, db
+from flask import render_template, redirect, url_for, flash
+from app.forms import SignUpForm 
+from app.models import User
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -22,7 +23,11 @@ def hoth():
         
         print(first_name, last_name, phone, address)
 
-
+        new_user = User(first_name=first_name, last_name=last_name, phone=phone, address=address)
+        
+        
+        db.session.add(new_user)
+        db.session.commit()
         # Redirect back to the home page
         return redirect(url_for('index'))
     
