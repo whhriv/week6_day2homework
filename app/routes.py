@@ -10,10 +10,10 @@ def index():
 def hoth():
     form = SignUpForm()
     if form.validate_on_submit():
-        print(form.first_name.data)
-        print(form.last_name.data)
-        print(form.phone.data)
-        print(form.address.data)
+        print('First Name: ',form.first_name.data)
+        print('Last Name: ',form.last_name.data)
+        print('Phone Number: ',form.phone.data)
+        print('Address: ',form.address.data)
         #get data from each of the fields
         first_name = form.first_name.data
         last_name = form.last_name.data
