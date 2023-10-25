@@ -14,7 +14,7 @@ def hoth():
         print('Last Name: ',form.last_name.data)
         print('Phone Number: ',form.phone.data)
         print('Address: ',form.address.data)
-        #get data from each of the fields
+        
         first_name = form.first_name.data
         last_name = form.last_name.data
         phone= form.phone.data
