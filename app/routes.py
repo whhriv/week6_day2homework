@@ -1,7 +1,8 @@
 from app import app, db
 from flask import render_template, redirect, url_for, flash
 from app.forms import SignUpForm 
-from app.models import User
+from app.models import User, Post
+
 @app.route('/')
 def index():
     return render_template('index.html')

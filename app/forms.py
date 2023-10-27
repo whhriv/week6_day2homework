@@ -9,3 +9,4 @@ class SignUpForm(FlaskForm):
     address = StringField('Address', validators=[InputRequired()])
     
     submit = SubmitField('Sign Up')
+

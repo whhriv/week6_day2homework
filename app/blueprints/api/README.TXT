@@ -1,0 +1,1 @@
+I have added several image files to be looked at.  Because I can't update the database (when I downgrade my efforts don't work), I don't feel like I am able to move forward.  With the database not being able to be upgraded, there isn't anything for it to iterate through.  
