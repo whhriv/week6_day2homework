@@ -1,6 +1,6 @@
 from app import app, db
-from flask import render_template, redirect, url_for, flash
-from app.forms import SignUpForm, LoginForm, Address
+from flask import render_template, redirect, url_for, flash, request
+from app.forms import SignUpForm, LoginForm, AddressForm
 from app.models import User, Address
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -16,12 +16,8 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = SignUpForm()
-    if form.validate_on_submit():
-        # print('First Name: ',form.first_name.data)
-        # print('Last Name: ',form.last_name.data)
-        # print('Phone Number: ',form.phone.data)
-        # print('Address: ',form.address.data)
-        
+    if  request.method=="POST":
+        print('made here')
         first_name = form.first_name.data
         last_name = form.last_name.data
         username = form.username.data
@@ -31,8 +27,11 @@ def register():
         
         print(first_name, last_name, phone, address)
         new_user = User(first_name=first_name, last_name=last_name, username=username, password=password, phone=phone, address=address)
-        check_user = db.session.execute(db.select(User).where(User.username==username)).scalar()
-        
+        check_user = User.query.filter_by(username=username).first()
+        if check_user is not None:
+            flash('user name already in use')
+            return render_template('register.html', form=form)
+
         #new_user = User(first_name=first_name, last_name=last_name, username=username, password=password)
         #new_user = User(first_name=first_name, last_name=last_name, phone=phone, address=address)
         
@@ -75,7 +74,7 @@ def logout():
 @app.route('/add-address', methods=["GET", "POST"])
 @login_required
 def add_address():
-    form = Address()
+    form = AddressForm()
     if form.validate_on_submit():
         first_name = form.first_name.data
         last_name = form.last_name.data

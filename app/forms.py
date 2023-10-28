@@ -7,8 +7,8 @@ class SignUpForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired()])
     first_name = StringField('First Name', validators=[InputRequired()])
     last_name = StringField('Last Name', validators=[InputRequired()])
-    phone = StringField('phone', validators=[InputRequired()])
-    address = StringField('Address', validators=[InputRequired()])
+    phone = StringField('phone', validators=[InputRequired()])  #include
+    address = StringField('Address', validators=[InputRequired()]) #include in register user
     submit = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):
@@ -17,7 +17,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Log In')
 
-class Address(FlaskForm):
+class AddressForm(FlaskForm):
     first_name = StringField('First Name', validators=[InputRequired()])
     last_name = StringField('Last Name', validators=[InputRequired()])
     phone = StringField('phone', validators=[InputRequired()])
