@@ -3,15 +3,29 @@
 {% block title %}Home{% endblock %}
 
 {% block header %}
-    <h1>Hello </h1>
+    
+    {% if current_user.is_authenticated %}
+        <h3>Hello, {{ current_user.username }}</h3>
+    {% else %}
+        <h3>Please Log In or Sign Up </h3>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1>This doesn't really matter</h1>
-    <br>
-    <div>
-        <img src="wompa.jpg" alt="GRRR">
+    <div class="col-12">
+        {% for i in users %}
+            <div class="card mb-3">
+                <div class="row g-0">
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ i.first_name }}</h5>
+                    <p class="card-text">{{ i.last_name }}</p>
+ 
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-</div>
 {% endblock %}

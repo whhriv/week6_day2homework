@@ -3,31 +3,31 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block header %}
-    <h1>To Visit Hoth, enter your information to sign up!</h1>
+    <h1>Sign Up Here</h1>
 {% endblock %}
 
 {% block content %}
 <div class="col">
     <div class="card mt-3">
         <div class="card-body">
-            
-            <!-- I had the action directing to "https://i.imgur.com/mT6t9hM.jpeg" but then it wouldn't print in terminal -->
             <form action="" method="post">
                 {{ form.csrf_token }}
-
+        
                 {{ form.first_name.label }}
                 {{ form.first_name(class='form-control', placeholder='Enter First Name') }}
         
                 {{ form.last_name.label }}
                 {{ form.last_name(class='form-control', placeholder='Enter Last Name') }}
         
-                {{ form.phone.label }}
-                {{ form.phone(class='form-control', placeholder='Enter Phone Number') }}
+                {{ form.username.label }}
+                {{ form.username(class='form-control', placeholder='Enter Username') }}
         
-                {{ form.address.label }}
-                {{ form.address(class='form-control', placeholder='Enter Address') }}
+
         
-                
+                {{ form.password.label }}
+                {{ form.password(class='form-control', placeholder='Enter Password') }}
+        
+        
                 {{ form.submit(class='btn btn-outline-primary w-100 mt-3') }}
         
             </form>
