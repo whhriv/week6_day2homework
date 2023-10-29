@@ -45,10 +45,10 @@ class User(db.Model):
         return self.token
 
 
-
+#####--------------PROBLEMATIC---------------#############
 @login.user_loader
 def get_user(user_id):
-    return db.session.get(User, user_id)
+    return db.session.get(User, user_id)  
 
 
 class Address(db.Model):
@@ -70,7 +70,7 @@ class Address(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'phone': self.phone,
-            'address': self.address
-            # 'Time' : self.date_created
+            'address': self.address,
+            'Time' : self.date_created
 
         }

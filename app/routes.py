@@ -51,13 +51,17 @@ def login():
         username = form.username.data
         password = form.password.data
         remember_me = form.remember_me.data
+        #login_user(user)
 
         #query user table for usrname
         user= db.session.execute(db.select(User).where(User.username==username)).scalar()
 
-        # Verify usr/pass
+##################------------NOT WORING------------####################
+##  LOGIN => VERIFY
+       
+        # Verify usr/pass  -NOT WORING----
         if user is not None and user.check_password(password):
-            login_user(user, remember=remember_me)
+            login_user(user)  ###  PROBLEMATIC- old: login_user(user,remember=remember_me)
             flash(f'{user.username} has logged in')
             return redirect(url_for('index'))
         else:

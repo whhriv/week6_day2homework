@@ -1,7 +1,7 @@
 *{
-    font-style: italic;
-    font-family: 'Comic Sans MS';
-    color: blue;
+    font-style: normal;
+    font-family: 'Monospace';
+    color: black;
     /* background-color:lightgray; */
 }
 /* img {
@@ -10,3 +10,6 @@
     margin-right: auto;
     width: 50%;
   } */
+  li {
+    list-style-type: none;
+  }

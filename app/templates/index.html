@@ -7,13 +7,19 @@
     {% if current_user.is_authenticated %}
         <h3>Hello, {{ current_user.username }}</h3>
     {% else %}
-        <h3>Please Log In or Sign Up </h3>
+        <h3>
+            <p></p>
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            -or-
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+
+        </h3>
     {% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="col-12">
-        {% for i in users %}
+        {% for i in register %}
             <div class="card mb-3">
                 <div class="row g-0">
 

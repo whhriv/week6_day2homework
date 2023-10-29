@@ -3,15 +3,17 @@
 {% block title %}Log In{% endblock %}
 
 {% block header %}
-    <h1>Log In Here</h1>
+    <h1>Log In</h1>
 {% endblock %}
 
 {% block content %}
     <div class="col">
-        <div class="card mt-3">
+        <div class="card mx-auto" style="width: 30rem">
             <div class="card-body">
                 <form action="" method="post">
                     {{ form.csrf_token }}
+                    {{ form.hidden_tag() }} 
+                    <!-- added from register -->
 
                     {{ form.username.label }}
                     {{ form.username(class='form-control', placeholder='Enter Username') }}
@@ -22,7 +24,7 @@
                     {{ form.remember_me(class='form-check-input') }}
                     {{ form.remember_me.label }}
 
-                    {{ form.submit(class='btn btn-outline-primary mt-3 w-100') }}
+                    {{ form.submit(class='btn btn-outline-dark mt-3 w-100') }}
                 </form>
             </div>
         </div>
