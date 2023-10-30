@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}ADDRESS LIST{% endblock %}
 
 {% block header %}
     
     {% if current_user.is_authenticated %}
         
     
-    <h3>Hello, you are logged in as {{ current_user.username }}</h3>
+    <h3>Hello, you are logged in as {{ current_user.username }} VIEWING ADDRESS LIST</h3>
     {% else %}
         <h3>
             <p></p>

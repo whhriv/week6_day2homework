@@ -14,6 +14,8 @@ def verify(username, password):
     if user is not None and user.check_password(password):
         return user
     return None
+# g.current_user = u
+#return u.check_hashed_password(password)
 
 @basic_auth.error_handler
 def handle_error(status):

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
@@ -13,6 +13,7 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     phone = db.Column(db.String, nullable=False, unique=True)
     address = db.Column(db.String, nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -23,7 +24,7 @@ class User(db.Model):
 
 
     def __repr__(self):
-        return f"<Address {self.id}|{self.title}>"
+        return f"<Address {self.id}|{self.username}>"
     
     def to_dict(self):
         return {
@@ -59,10 +60,10 @@ class Address(db.Model):
     address = db.Column(db.String, nullable=False, unique=True)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    usrname = db.Column(db.Integer, db.ForeignKey('user.username'), nullable=False)
     
     def __repr__(self):
-        return f"<ADDRESS {self.id}|{self.title}>"
+        return f"<ADDRESS {self.id}|{self.address}>"
     
     def to_dict(self):
         return {
@@ -74,3 +75,11 @@ class Address(db.Model):
             'Time' : self.date_created
 
         }
+    def get_token(self):
+        now = datetime.utcnow()
+        if self.token and self.token_expiration > now + timedelta(minutes=1):
+            return self.token
+        self.token = base64.b64encode(os.urandom(24)).decode('utf-8')
+        self.token_expiration = now + timedelta(hours=1)
+        db.session.commit()
+        return self.token

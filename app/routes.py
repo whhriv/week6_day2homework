@@ -7,10 +7,13 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 @app.route('/')
 def index():
-    #address = db.session.execute(db.select(User)).scalars().all()
+    addresses = db.session.execute(db.select(Address)).scalars().all()
+    print(addresses)
     #user = db.session.execute(db.select(User).order_by(db.desc(User.date_created))).scalars().all()
     # posts = db.session.execute(db.select(User).order_by(db.desc(User.date_created))).scalars().all()
-    return render_template('index.html')
+    return render_template('index.html', addresses=addresses)
+    
+    #return render_template('index.html', posts=posts)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,10 +35,6 @@ def register():
             flash('user name already in use')
             return render_template('register.html', form=form)
 
-        #new_user = User(first_name=first_name, last_name=last_name, username=username, password=password)
-        #new_user = User(first_name=first_name, last_name=last_name, phone=phone, address=address)
-        
-        
         db.session.add(new_user)
         db.session.commit()
         # Redirect back to the home page
@@ -56,10 +55,6 @@ def login():
         #query user table for usrname
         user= db.session.execute(db.select(User).where(User.username==username)).scalar()
 
-##################------------NOT WORING------------####################
-##  LOGIN => VERIFY
-       
-        # Verify usr/pass  -NOT WORING----
         if user is not None and user.check_password(password):
             login_user(user)  ###  PROBLEMATIC- old: login_user(user,remember=remember_me)
             flash(f'{user.username} has logged in')
@@ -94,4 +89,7 @@ def add_address():
 
         flash(f"{new_address.address} has been added")
         return redirect(url_for('index'))
-    return render_template('add_address.html', form=form)
+    return render_template('add-address.html', form=form)
+
+
+
